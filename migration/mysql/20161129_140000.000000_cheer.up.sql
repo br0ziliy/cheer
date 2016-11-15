@@ -1,0 +1,54 @@
+SET foreign_key_checks = 1;
+SET time_zone = '+00:00';
+
+CREATE TABLE `group` (
+    id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+
+    name VARCHAR(50) NOT NULL,
+    description VARCHAR(100) NOT NULL DEFAULT 'no description',
+
+    created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+    deleted_at TIMESTAMP NULL DEFAULT NULL,
+
+    UNIQUE KEY (name),
+
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE `member` (
+    id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+
+    ircnick VARCHAR(20) NOT NULL,
+    fullname VARCHAR(100) NOT NULL,
+
+    group_id INT(10) UNSIGNED NOT NULL,
+
+    created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+    deleted_at TIMESTAMP NULL DEFAULT NULL,
+
+    UNIQUE KEY (ircnick),
+    CONSTRAINT `f_member_group` FOREIGN KEY (`group_id`) REFERENCES `group` (`id`),
+
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE `cheer` (
+    id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+
+    points INT(10) UNSIGNED NOT NULL,
+    cheer TEXT,
+
+    from_id INT(10) UNSIGNED NOT NULL,
+    to_id INT(10) UNSIGNED NOT NULL,
+
+    created_at TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+    deleted_at TIMESTAMP NULL DEFAULT NULL,
+
+    CONSTRAINT `f_from` FOREIGN KEY (`from_id`) REFERENCES `member` (`id`),
+    CONSTRAINT `f_to` FOREIGN KEY (`to_id`) REFERENCES `member` (`id`),
+
+    PRIMARY KEY (id)
+);

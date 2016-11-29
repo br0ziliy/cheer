@@ -10,6 +10,7 @@ import (
 	"github.com/arapov/cheer/controller/static"
 	"github.com/arapov/cheer/controller/status"
 
+	"github.com/arapov/cheer/controller/cheers"
 	"github.com/arapov/cheer/controller/groups"
 	"github.com/arapov/cheer/controller/members"
 )
@@ -25,4 +26,5 @@ func LoadRoutes() {
 	status.Load()
 	groups.Load()
 	members.Load()
+	cheers.Load()
 }

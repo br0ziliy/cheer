@@ -1,0 +1,104 @@
+{{define "title"}}Cheer!{{end}}
+{{define "head"}}
+{{CSS "/static/css/jquery.typeahead.min.css" "all"}}
+{{JS "/static/js/jquery.typeahead.min.js"}}
+{{end}}
+{{define "content"}}
+	<div class="page-header">
+	<h2>Hello, {{.group.Name}}</h2>
+	<p>Please provide your input to the people from your group ({{.group.Group}})</p>
+	<p>You have 100 points to distribute among people based</p>
+	</div>
+
+	<form method="post" action="{{$.BaseURI}}cheers/submit" class="form-horizontal">
+		<input type="text" name="from_id" id="from_id" class="hidden" value="{{.group.ID}}">
+
+	<div id="form-group-container">
+	{{range $n := .items}}
+	<div class="form-group">
+		<input type="text" name="to_id" id="to_id" class="hidden" value="{{.ID}}">
+		<div class="col-sm-2">
+			<input type="text" name="ircnick" id="ircnick" class="form-control" value="{{.IRC}}" readonly="readonly">
+		</div>
+		<div class="col-sm-2">
+			<input type="text" name="fullname" id="fullname" class="form-control" value="{{.Name}}" readonly="readonly">
+		</div>
+		<div class="col-sm-1">
+			<input type="number" name="points" id="points" class="form-control" placeholder="points">
+		</div>
+		<div class="col-sm-7">
+			<input type="text" name="message" id="message" class="form-control" placeholder="leave your message to {{.Name}}">
+		</div>
+	</div>
+	{{end}}
+	</div>
+		<button type="button" id="plusone" class="btn btn" onclick="addinputFields()"/>
+		<span class="fa fa-plus" aria-hidden="true"></span> 1
+		</button>
+
+		<button type="submit" class="btn btn-success pull-right">
+		<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Submit
+		</button>
+
+		<input type="hidden" name="_token" value="{{$.token}}"/>
+
+		<div class="form-group"><p/></div>
+	</form>
+
+
+<script>
+var taopts={
+    input: '.js-typeahead-group',
+    order: 'desc',
+    source: {
+        group: {
+                display: 'IRC',
+                data: jQuery.parseJSON(atob({{.json}}))
+                } 
+    },
+    callback: {
+        onInit: function (node) {
+		console.log('Typeahead Initiated on ' + node.selector);
+        },
+    	onClickAfter: function (node, a, item, event) {
+		$('#to_id.taid').val(item.ID);
+		$('#fullname.taname').val(item.Name);
+    	}
+    }
+};
+
+function addinputFields() {
+	var plusone = document.getElementById("plusone");
+	plusone.parentNode.removeChild(plusone);
+
+	var objTo = document.getElementById("form-group-container");
+	var addmember = document.createElement("div");
+	addmember.className = 'form-group';
+	addmember.innerHTML = 
+                '<input type="text" name="to_id" id="to_id" class="hidden taid">' +
+                '<div class="col-sm-2">' +
+		'<div class="typeahead__container">' +
+		'<div class="typeahead__field">' +
+		'<span class="typeahead__query">' +
+                '       <input type="search" name="ircnick" id="ircnick" class="form-control js-typeahead-group" autocomplete="off">' +
+		'</span>' +
+		'</div>' +
+                '</div>' +
+		'</div>' +
+		'<div class="col-sm-2">' +
+		'	<input type="text" name="fullname" id="fullname" class="form-control taname" readonly="readonly">' +
+		'</div>' +
+                '<div class="col-sm-1">' +
+                '        <input type="number" name="points" id="points" class="form-control" placeholder="points">' +
+                '</div>' +
+                '<div class="col-sm-7">' +
+                '        <input type="text" name="message" id="message" class="form-control" placeholder="leave your message">' +
+                '</div>';
+		$('.js-typeahead-group', addmember).typeahead(taopts);
+		objTo.appendChild(addmember);
+}
+</script>
+
+{{template "footer" .}}
+{{end}}
+{{define "foot"}}{{end}}

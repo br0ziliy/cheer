@@ -7,8 +7,8 @@ SET time_zone = '+00:00';
 # ******************************************************************************
 # Create new tables
 # ******************************************************************************
-# CREATE DATABASE IF NOT EXISTS blueprint DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
-# USE blueprint;
+# CREATE DATABASE IF NOT EXISTS cheer DEFAULT CHARSET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
+# USE cheer;
 
 # ******************************************************************************
 # Create tables

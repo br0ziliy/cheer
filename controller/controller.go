@@ -6,7 +6,6 @@ import (
 	"github.com/arapov/cheer/controller/debug"
 	"github.com/arapov/cheer/controller/home"
 	"github.com/arapov/cheer/controller/login"
-	"github.com/arapov/cheer/controller/notepad"
 	"github.com/arapov/cheer/controller/register"
 	"github.com/arapov/cheer/controller/static"
 	"github.com/arapov/cheer/controller/status"
@@ -21,5 +20,4 @@ func LoadRoutes() {
 	home.Load()
 	static.Load()
 	status.Load()
-	notepad.Load()
 }

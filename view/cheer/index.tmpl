@@ -107,6 +107,13 @@ function addinputFields() {
 		$('.selectpicker', addmember).selectpicker();
 		objTo.appendChild(addmember);
 }
+
+// submit by the button only
+$(document).on("keypress", ":input:not([type=submit])", function(event) {
+    if (event.keyCode == 13) {
+        event.preventDefault();
+    }
+});
 </script>
 
 	{{template "footer" .}}

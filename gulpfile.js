@@ -68,6 +68,14 @@ gulp.task('bootstrap', function() {
 		.pipe(gulp.dest(folderAsset + '/static/js/'));
 });
 
+// Bootstrap-select Task
+gulp.task('bootstrap-select', function() {
+	gulp.src('node_modules/bootstrap-select/dist/css/bootstrap-select.min.*')
+		.pipe(gulp.dest(folderAsset + '/static/css/'));
+	return gulp.src('node_modules/bootstrap-select/dist/js/bootstrap-select.min.*')
+		.pipe(gulp.dest(folderAsset + '/static/js/'));
+});
+
 // Patternfly Task
 gulp.task('patternfly', function() {
    gulp.src('node_modules/patternfly/dist/css/patternfly-additions.min.*')
@@ -174,7 +182,7 @@ gulp.task('watch', function() {
 });
 
 // Init - every task
-gulp.task('init', ['sass', 'javascript', 'jquery', 'jquery-typeahead', 'bootstrap', 'patternfly', 'underscore', 'favicon']);
+gulp.task('init', ['sass', 'javascript', 'jquery', 'jquery-typeahead', 'bootstrap', 'bootstrap-select', 'patternfly', 'underscore', 'favicon']);
 
 // Default - only run the tasks that change often
 gulp.task('default', ['sass', 'javascript']);

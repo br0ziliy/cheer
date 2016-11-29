@@ -10,6 +10,7 @@
     "gulp-real-favicon": "^0.2.1",
     "gulp-sass": "^2.3.2",
     "jquery": "1.9.1 - 2",
+    "jquery-typeahead": "^2.7.2",
     "run-sequence": "^1.2.2",
     "underscore": "^1.8.3"
   }

@@ -48,6 +48,14 @@ gulp.task('jquery', function() {
 		.pipe(gulp.dest(folderAsset + '/static/js/'));
 });
 
+// jQuery-typeahead Task
+gulp.task('jquery-typeahead', function() {
+   gulp.src('node_modules/jquery-typeahead/dist/jquery.typeahead.min.css')
+           .pipe(gulp.dest(folderAsset + '/static/css/'));
+   return gulp.src('node_modules/jquery-typeahead/dist/jquery.typeahead.min.js')
+           .pipe(gulp.dest(folderAsset + '/static/js/'));
+});
+
 // Bootstrap Task
 gulp.task('bootstrap', function() {
 	gulp.src('node_modules/bootstrap/dist/css/bootstrap-theme.min.*')
@@ -166,7 +174,7 @@ gulp.task('watch', function() {
 });
 
 // Init - every task
-gulp.task('init', ['sass', 'javascript', 'jquery', 'bootstrap', 'patternfly', 'underscore', 'favicon']);
+gulp.task('init', ['sass', 'javascript', 'jquery', 'jquery-typeahead', 'bootstrap', 'patternfly', 'underscore', 'favicon']);
 
 // Default - only run the tasks that change often
 gulp.task('default', ['sass', 'javascript']);

@@ -2,14 +2,14 @@
 package controller
 
 import (
-	"github.com/blue-jay/blueprint/controller/about"
-	"github.com/blue-jay/blueprint/controller/debug"
-	"github.com/blue-jay/blueprint/controller/home"
-	"github.com/blue-jay/blueprint/controller/login"
-	"github.com/blue-jay/blueprint/controller/notepad"
-	"github.com/blue-jay/blueprint/controller/register"
-	"github.com/blue-jay/blueprint/controller/static"
-	"github.com/blue-jay/blueprint/controller/status"
+	"github.com/arapov/cheer/controller/about"
+	"github.com/arapov/cheer/controller/debug"
+	"github.com/arapov/cheer/controller/home"
+	"github.com/arapov/cheer/controller/login"
+	"github.com/arapov/cheer/controller/notepad"
+	"github.com/arapov/cheer/controller/register"
+	"github.com/arapov/cheer/controller/static"
+	"github.com/arapov/cheer/controller/status"
 )
 
 // LoadRoutes loads the routes for each of the controllers.

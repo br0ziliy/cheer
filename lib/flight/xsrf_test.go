@@ -5,7 +5,7 @@ import (
 	"log"
 	"testing"
 
-	"github.com/blue-jay/blueprint/lib/flight"
+	"github.com/arapov/cheer/lib/flight"
 	"github.com/blue-jay/core/xsrf"
 )
 

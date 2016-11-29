@@ -5,9 +5,9 @@ import (
 	"errors"
 	"net/http"
 
-	"github.com/blue-jay/blueprint/lib/flight"
-	"github.com/blue-jay/blueprint/middleware/acl"
-	"github.com/blue-jay/blueprint/model/user"
+	"github.com/arapov/cheer/lib/flight"
+	"github.com/arapov/cheer/middleware/acl"
+	"github.com/arapov/cheer/model/user"
 
 	"github.com/blue-jay/core/flash"
 	"github.com/blue-jay/core/form"

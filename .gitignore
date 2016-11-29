@@ -8,6 +8,9 @@
 thumbs.db
 !/filestorage/README.md
 
+# Static stuff that generates
+/asset/static/
+
 # Blue Jay Files
 env.json
 *.exe

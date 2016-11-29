@@ -97,7 +97,7 @@ gulp.task('favicon-generate', function(done) {
 				pictureAspect: 'noChange',
 				themeColor: favColor,
 				manifest: {
-					name: 'Blueprint',
+					name: 'Cheer',
 					display: 'browser',
 					orientation: 'notSet',
 					onConflict: 'override',

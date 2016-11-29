@@ -1,0 +1,3 @@
+ALTER TABLE `cheer`
+ADD referer VARCHAR(20) NOT NULL;
+

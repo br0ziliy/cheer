@@ -10,8 +10,3 @@ DROP TABLE IF EXISTS user;
 DROP TABLE IF EXISTS user_status;
 DROP TABLE IF EXISTS note;
 
-# ******************************************************************************
-# Drop database
-# ******************************************************************************
-DROP DATABASE cheer;
-

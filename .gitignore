@@ -10,6 +10,7 @@ thumbs.db
 
 # Static stuff that generates
 /asset/static/
+/asset/dynamic/favicon/data.json
 
 # Blue Jay Files
 env.json

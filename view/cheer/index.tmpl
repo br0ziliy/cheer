@@ -41,9 +41,15 @@
 		<span class="fa fa-plus" aria-hidden="true"></span> 1
 		</button>
 
-		<button type="submit" class="btn btn-success pull-right">
-		<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Submit
-		</button>
+		<div style="display; inline-block;" class="pull-right">																					
+			<button type="submit" class="btn btn-success">
+			<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Submit
+			</button>
+	
+			<a title="Back" class="btn btn-default" role="button" href="{{$.ParentURI}}">
+			<span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span> Back
+			</a>
+		</div>
 
 		<input type="hidden" name="_token" value="{{$.token}}"/>
 

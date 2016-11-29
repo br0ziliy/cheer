@@ -1,7 +1,8 @@
 {{define "title"}}Cheer!{{end}}
 {{define "head"}}
-{{CSS "/static/css/jquery.typeahead.min.css" "all"}}
-{{JS "/static/js/jquery.typeahead.min.js"}}
+	{{CSS "/static/css/bootstrap-select.min.css" "all"}}
+	{{CSS "/static/css/jquery.typeahead.min.css" "all"}}
+	{{JS "/static/js/jquery.typeahead.min.js"}}
 {{end}}
 {{define "content"}}
 	<div class="page-header">
@@ -24,7 +25,11 @@
 			<input type="text" name="fullname" id="fullname" class="form-control" value="{{.Name}}" readonly="readonly">
 		</div>
 		<div class="col-sm-1">
-			<input type="number" name="points" id="points" class="form-control" placeholder="points">
+			<select class="selectpicker form-control" name="points" id="points">
+			  <option>+3</option>
+			  <option>+2</option>
+			  <option selected="selected">+1</option>
+			</select>
 		</div>
 		<div class="col-sm-7">
 			<input type="text" name="message" id="message" class="form-control" placeholder="leave your message to {{.Name}}">
@@ -89,16 +94,23 @@ function addinputFields() {
 		'	<input type="text" name="fullname" id="fullname" class="form-control taname" readonly="readonly">' +
 		'</div>' +
                 '<div class="col-sm-1">' +
-                '        <input type="number" name="points" id="points" class="form-control" placeholder="points">' +
+				'		 <select class="selectpicker form-control" name="points" id="points">' +
+			    '          <option>+3</option>' +
+  				'		   <option>+2</option>' +
+				'		   <option selected="selected">+1</option>' +
+				'		 </select>' +
                 '</div>' +
                 '<div class="col-sm-7">' +
                 '        <input type="text" name="message" id="message" class="form-control" placeholder="leave your message">' +
                 '</div>';
 		$('.js-typeahead-group', addmember).typeahead(taopts);
+		$('.selectpicker', addmember).selectpicker();
 		objTo.appendChild(addmember);
 }
 </script>
 
-{{template "footer" .}}
+	{{template "footer" .}}
 {{end}}
-{{define "foot"}}{{end}}
+{{define "foot"}}
+	{{JS "/static/js/bootstrap-select.min.js" }}
+{{end}}

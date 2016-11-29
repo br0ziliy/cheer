@@ -1,0 +1,74 @@
+{{define "title"}}Edit{{end}}
+{{define "head"}}
+{{CSS "/static/css/jquery.typeahead.min.css" "all"}}
+{{JS "/static/js/jquery.typeahead.min.js"}}
+{{end}}
+{{define "content"}}
+	<div class="page-header">
+		<h1>{{template "title" .}}</h1>
+	</div>
+
+	<form method="post" action="{{$.CurrentURI}}?_method=patch" class="form-horizontal">
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="ircnick">IRC Nick</label>
+			<div class="col-sm-10"><input {{TEXT "ircnick" .item.IRC .}} class="form-control" id="ircnick"></div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="fullname">Full Name</label>
+			<div class="col-sm-10"><input {{TEXT "fullname" .item.Name .}} class="form-control" id="fullname"></div>
+		</div>
+		<div class="form-group">
+			<label class="col-sm-2 control-label" for="group_id">Group</label>
+			<div class="col-sm-10">
+				<div class="typeahead__container">
+				<div class="typeahead__field">
+					<span class="typeahead__query">
+					<input {{TEXT "groupname" .item.Group .}} class="js-typeahead-group form-control" autocomplete="off" type="search">
+					</span>
+				</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="form-group">
+			<div class="col-sm-10"><input {{TEXT "group_id" .item.GID .}} class="hidden form-control" id="group_id"></div>
+		</div>
+
+                <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-success" title="Save" />
+                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Save
+                                </button>
+
+                                <a title="Back" class="btn btn-default" role="button" href="{{$.GrandparentURI}}">
+                                <span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span> Back
+                                </a>
+                        </div>
+                </div>
+
+                <input type="hidden" name="_token" value="{{$.token}}">
+	</form>
+<script>
+$.typeahead({
+    input: '.js-typeahead-group',
+    order: "desc",
+    source: {
+	group: {
+		display: 'Name',
+		data: jQuery.parseJSON(atob({{.json}}))
+		}
+    },
+    callback: {
+        onInit: function (node) {
+            console.log('Typeahead Initiated on ' + node.selector);
+        },
+	onClickAfter: function (node, a, item, event) {
+	    console.log('item is ' + item.ID);
+	    $('#group_id').val(item.ID);
+	}
+    }
+});
+</script>
+{{template "footer" .}}
+{{end}}
+{{define "foot"}}{{end}}

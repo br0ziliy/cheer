@@ -11,6 +11,7 @@ import (
 	"github.com/arapov/cheer/controller/status"
 
 	"github.com/arapov/cheer/controller/groups"
+	"github.com/arapov/cheer/controller/members"
 )
 
 // LoadRoutes loads the routes for each of the controllers.
@@ -23,4 +24,5 @@ func LoadRoutes() {
 	static.Load()
 	status.Load()
 	groups.Load()
+	members.Load()
 }

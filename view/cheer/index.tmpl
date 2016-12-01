@@ -41,7 +41,7 @@
 		</button>
 
 		<div style="display; inline-block;" class="pull-right">
-			<button type="submit" class="btn btn-success">
+			<button type="submit" class="btn btn-success" id="submitbtn">
 			<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Submit
 			</button>
 
@@ -68,9 +68,26 @@ var taopts={
 		}
 	},
 	callback: {
+		onInit: function (node) {
+			$('#submitbtn').attr('disabled', 'disabled');
+		},
 		onClickAfter: function (node, a, item, event) {
-			$('#to_id.taid').val(item.ID);
-			$('#fullname.taname').val(item.Name);
+			var json = $.parseJSON(atob({{.json}}));
+			var hasMatch = false;
+
+			for (var i = 0; i < json.length; ++i) {
+				var nick = json[i].IRC;
+				if (item.IRC === nick) {
+					hasMatch = true;
+					break;
+				}
+			}
+
+			if (hasMatch) {
+				$('#submitbtn').removeAttr('disabled');
+				$('#to_id.taid').val(item.ID);
+				$('#fullname.taname').val(item.Name);
+			}
 		}
 	}
 };

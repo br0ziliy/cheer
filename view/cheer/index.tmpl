@@ -6,8 +6,8 @@
 {{end}}
 {{define "content"}}
 	<div class="page-header">
-	<h2>Hello, {{.group.Name}}</h2>
-	<p>Please cheer people from your group ({{.group.Group}})</p>
+		<h2>Hello, <strong>{{.group.Name}}</strong></h2>
+		<p>Please cheer people from your group (<em>{{.group.Group}}</em>)</p>
 	</div>
 
 	<form method="post" action="{{$.BaseURI}}cheers/submit" class="form-horizontal">
@@ -36,9 +36,13 @@
 	</div>
 	{{end}}
 	</div>
-		<button type="button" id="plusone" class="btn btn" onclick="addinputFields()"/>
-		<span class="pf pficon-user" aria-hidden="true"></span> Add
-		</button>
+		<div id="action-group">
+			<div class="addremove-button" id="addbutton">
+				<button type="button" class="btn btn-default" onclick="addinputFields();">
+				<span class="pf pficon-user" aria-hidden="true"></span> Add
+				</button>
+			</div>
+		</div>
 
 		<div style="display; inline-block;" class="pull-right">
 			<button type="submit" class="btn btn-success" id="submitbtn">
@@ -102,13 +106,46 @@ var taopts={
 	}
 };
 
+// Below stuff need refuctoring and simple add/remove(thing)
+
+function removeinputFields() {
+	var minusone = document.getElementById("removebutton");
+	minusone.parentNode.removeChild(minusone);
+
+	var extrafield = document.getElementById("extra-field");
+	extrafield.parentNode.removeChild(extrafield);
+
+	var to_actiongrp = document.getElementById("action-group");
+	var addremovebtn = document.createElement("div");
+	addremovebtn.className = 'addremove-button';
+	addremovebtn.id = 'addbutton';
+	addremovebtn.innerHTML =
+			'<button type="button" class="btn btn-default" onclick="addinputFields();">' +
+			'<span class="pf pficon-user" aria-hidden="true"></span> Add' +
+			'</button>';
+	to_actiongrp.appendChild(addremovebtn);
+
+	$('#submitbtn').removeAttr('disabled');
+}
+
 function addinputFields() {
-	var plusone = document.getElementById("plusone");
+	var plusone = document.getElementById("addbutton");
 	plusone.parentNode.removeChild(plusone);
+
+	var to_actiongrp = document.getElementById("action-group");
+	var addremovebtn = document.createElement("div");
+	addremovebtn.className = 'addremove-button';
+	addremovebtn.id = 'removebutton';
+	addremovebtn.innerHTML =
+			'<button type="button" class="btn btn-danger" onclick="removeinputFields();">' +
+			'<span class="pf pficon-user" aria-hidden="true"></span> Remove' +
+			'</button>';
+	to_actiongrp.appendChild(addremovebtn);
 
 	var objTo = document.getElementById("form-group-container");
 	var addmember = document.createElement("div");
 	addmember.className = 'form-group';
+	addmember.id = 'extra-field';
 	addmember.innerHTML =
 		'<input type="text" name="to_id" id="to_id" class="hidden taid">' +
 		'<div class="col-sm-2">' +

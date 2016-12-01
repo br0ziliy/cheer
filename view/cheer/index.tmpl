@@ -60,10 +60,20 @@ var taopts={
 	input: '.js-typeahead-group',
 	cancelButton: false,
 	mustSelectItem: true,
+	minLength: 0,
+	maxItem: 5,
+	searchOnFocus: true,
 	order: 'desc',
+	emptyTemplate: 'No result for "{{`{{query}}`}}"',
+	template: "{{`{{IRC}}`}}<br/><small style='color:#999;'>{{`{{Name}}`}}</small>",
+	backdrop: {
+		"background-color": "#3879d9",
+		"opacity": "0.1",
+		"filter": "alpha(opacity=10)"
+	},
 	source: {
 		group: {
-			display: 'IRC',
+			display: ['IRC', 'Name'],
 			data: jQuery.parseJSON(atob({{.json}}))
 		}
 	},
@@ -103,11 +113,11 @@ function addinputFields() {
 		'<input type="text" name="to_id" id="to_id" class="hidden taid">' +
 		'<div class="col-sm-2">' +
 			'<div class="typeahead__container">' +
-			'<div class="typeahead__field">' +
-			'<span class="typeahead__query">' +
-				'<input type="search" name="ircnick" id="ircnick" class="form-control js-typeahead-group" autocomplete="off">' +
-			'</span>' +
-			'</div>' +
+				'<div class="typeahead__field">' +
+					'<span class="typeahead__query">' +
+					'<input type="search" name="ircnick" id="ircnick" class="js-typeahead-group" placeholder="nickname" autocomplete="off" style="padding: 2px 6px; height: 26px; font-size: 12px;">' +
+					'</span>' +
+				'</div>' +
 			'</div>' +
 		'</div>' +
 		'<div class="col-sm-2">' +

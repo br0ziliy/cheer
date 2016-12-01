@@ -1,4 +1,4 @@
-{{define "title"}}Cheers{{end}}
+{{define "title"}}Cheer{{end}}
 {{define "head"}}
 	{{CSS "/static/css/jquery.typeahead.min.css" "all"}}
 	{{JS "/static/js/jquery.typeahead.min.js"}}
@@ -20,19 +20,20 @@
 	<div class="form-group"><p/></div>
 
 	<div class="form-group">
-		<label class="col-sm-offset-2 col-sm-2 control-label" for="ircnick">Your IRC nickname</label>
+		<input {{TEXT "ircnick" .item.IRC .}} id="ircnick" class="hidden">
+		<label class="col-sm-offset-2 col-sm-2 control-label" for="nick">Your IRC nickname</label>
 		<div class="col-sm-4">
 			<div class="typeahead__container">
-			<div class="typeahead__field">
-				<span class="typeahead__query">
-				<input {{TEXT "ircnick" .item.IRC .}} id="ircnick" class="form-control js-typeahead-group" placeholder="enter your irc nickname" autocomplete="off" type="search">
-				</span>
-			</div>
+				<div class="typeahead__field">
+					<span class="typeahead__query">
+					<input {{TEXT "ircnick" .item.IRC .}} id="nick" class="js-typeahead-group" placeholder="nickname" autocomplete="off" type="search" style="padding: 2px 6px; height: 26px; font-size: 12px;">
+					</span>
+				</div>
 			</div>
 		</div>
 		<div class="col-sm-1">
-			<button type="submit" class="btn btn-primary" />
-			<span class="fa fa-angle-right" aria-hidden="true"></span> Sign In
+			<button type="submit" class="btn btn-primary" id="submitbtn">
+				<span class="fa fa-angle-right" aria-hidden="true"></span> Sign In
 			</button>
 		</div>
 	</div>
@@ -51,11 +52,43 @@
 <script>
 $.typeahead({
 	input: '.js-typeahead-group',
+	cancelButton: false,
+	minLength: 0,
+	maxItem: 5,
+	searchOnFocus: true,
 	order: "desc",
+	emptyTemplate: 'No result for "{{`{{query}}`}}"',
+	template: "{{`{{IRC}}`}} - <small style='color:#999;'>{{`{{Name}}`}}</small>",
+	backdrop: {
+		"background-color": "#3879d9",
+		"opacity": "0.1",
+	},
 	source: {
 		group: {
 			display: 'IRC',
 			data: jQuery.parseJSON(atob({{.json}}))
+		}
+	},
+	callback: {
+		onInit: function (node) {
+			$('#submitbtn').attr('disabled', 'disabled');
+		},
+		onClickAfter: function (node, a, item, event) {
+			var json = $.parseJSON(atob({{.json}}));
+			var hasMatch = false;
+
+			for (var i = 0; i < json.length; ++i) {
+				var nick = json[i].IRC;
+				if (item.IRC === nick) {
+					hasMatch = true;
+					break;
+				}
+			}
+
+			if (hasMatch) {
+				$('#submitbtn').removeAttr('disabled');
+				$('#ircnick').val(item.IRC);
+			}
 		}
 	}
 });

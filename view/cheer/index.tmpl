@@ -40,11 +40,11 @@
 		<span class="fa fa-plus" aria-hidden="true"></span> 1
 		</button>
 
-		<div style="display; inline-block;" class="pull-right">																					
+		<div style="display; inline-block;" class="pull-right">
 			<button type="submit" class="btn btn-success">
 			<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> Submit
 			</button>
-	
+
 			<a title="Back" class="btn btn-default" role="button" href="{{$.ParentURI}}">
 			<span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span> Back
 			</a>
@@ -55,26 +55,24 @@
 		<div class="form-group"><p/></div>
 	</form>
 
-
 <script>
 var taopts={
-    input: '.js-typeahead-group',
-    order: 'desc',
-    source: {
-        group: {
-                display: 'IRC',
-                data: jQuery.parseJSON(atob({{.json}}))
-                } 
-    },
-    callback: {
-        onInit: function (node) {
-		console.log('Typeahead Initiated on ' + node.selector);
-        },
-    	onClickAfter: function (node, a, item, event) {
-		$('#to_id.taid').val(item.ID);
-		$('#fullname.taname').val(item.Name);
-    	}
-    }
+	input: '.js-typeahead-group',
+	cancelButton: false,
+	mustSelectItem: true,
+	order: 'desc',
+	source: {
+		group: {
+			display: 'IRC',
+			data: jQuery.parseJSON(atob({{.json}}))
+		}
+	},
+	callback: {
+		onClickAfter: function (node, a, item, event) {
+			$('#to_id.taid').val(item.ID);
+			$('#fullname.taname').val(item.Name);
+		}
+	}
 };
 
 function addinputFields() {
@@ -84,40 +82,40 @@ function addinputFields() {
 	var objTo = document.getElementById("form-group-container");
 	var addmember = document.createElement("div");
 	addmember.className = 'form-group';
-	addmember.innerHTML = 
-                '<input type="text" name="to_id" id="to_id" class="hidden taid">' +
-                '<div class="col-sm-2">' +
-		'<div class="typeahead__container">' +
-		'<div class="typeahead__field">' +
-		'<span class="typeahead__query">' +
-                '       <input type="search" name="ircnick" id="ircnick" class="form-control js-typeahead-group" autocomplete="off">' +
-		'</span>' +
-		'</div>' +
-                '</div>' +
+	addmember.innerHTML =
+		'<input type="text" name="to_id" id="to_id" class="hidden taid">' +
+		'<div class="col-sm-2">' +
+			'<div class="typeahead__container">' +
+			'<div class="typeahead__field">' +
+			'<span class="typeahead__query">' +
+				'<input type="search" name="ircnick" id="ircnick" class="form-control js-typeahead-group" autocomplete="off">' +
+			'</span>' +
+			'</div>' +
+			'</div>' +
 		'</div>' +
 		'<div class="col-sm-2">' +
 		'	<input type="text" name="fullname" id="fullname" class="form-control taname" readonly="readonly">' +
 		'</div>' +
-                '<div class="col-sm-1">' +
-				'		 <select class="selectpicker form-control" name="points" id="points">' +
-			    '          <option>+3</option>' +
-  				'		   <option>+2</option>' +
-				'		   <option selected="selected">+1</option>' +
-				'		 </select>' +
-                '</div>' +
-                '<div class="col-sm-7">' +
-                '        <input type="text" name="message" id="message" class="form-control" placeholder="leave your message">' +
-                '</div>';
+		'<div class="col-sm-1">' +
+			'<select class="selectpicker form-control" name="points" id="points">' +
+				'<option>+3</option>' +
+				'<option>+2</option>' +
+				'<option selected="selected">+1</option>' +
+			'</select>' +
+		'</div>' +
+		'<div class="col-sm-7">' +
+			'<input type="text" name="message" id="message" class="form-control" placeholder="leave your message">' +
+		'</div>';
 		$('.js-typeahead-group', addmember).typeahead(taopts);
 		$('.selectpicker', addmember).selectpicker();
 		objTo.appendChild(addmember);
 }
 
-// submit by the button only
+// submit by the button only, ignore everything else
 $(document).on("keypress", ":input:not([type=submit])", function(event) {
-    if (event.keyCode == 13) {
-        event.preventDefault();
-    }
+	if (event.keyCode == 13) {
+		event.preventDefault();
+	}
 });
 </script>
 

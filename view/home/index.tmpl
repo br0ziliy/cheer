@@ -11,14 +11,6 @@
 
 <form method="post" action="{{$.BaseURI}}cheers" class="form-horizontal">
 
-	<!-- todo: Fix this Valignment! -->
-	<div class="form-group"><p/></div>
-	<div class="form-group"><p/></div>
-	<div class="form-group"><p/></div>
-	<div class="form-group"><p/></div>
-	<div class="form-group"><p/></div>
-	<div class="form-group"><p/></div>
-
 	<div class="form-group">
 		<input {{TEXT "ircnick" .item.IRC .}} id="ircnick" class="hidden">
 		<label class="col-sm-offset-2 col-sm-2 control-label" for="nick">Your IRC nickname</label>
@@ -45,13 +37,6 @@
 
 	<input type="hidden" name="_token" value="{{$.token}}">
 
-	<!-- todo: Fix this Valignment! -->
-	<div class="form-group"><p/></div>
-	<div class="form-group"><p/></div>
-	<div class="form-group"><p/></div>
-	<div class="form-group"><p/></div>
-	<div class="form-group"><p/></div>
-	<div class="form-group"><p/></div>
 </form>
 
 <script>

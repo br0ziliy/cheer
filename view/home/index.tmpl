@@ -1,7 +1,7 @@
 {{define "title"}}Cheers{{end}}
 {{define "head"}}
-{{CSS "/static/css/jquery.typeahead.min.css" "all"}}
-{{JS "/static/js/jquery.typeahead.min.js"}}
+	{{CSS "/static/css/jquery.typeahead.min.css" "all"}}
+	{{JS "/static/js/jquery.typeahead.min.js"}}
 {{end}}
 {{define "content"}}
 
@@ -20,20 +20,20 @@
 	<div class="form-group"><p/></div>
 
 	<div class="form-group">
-	  <label class="col-sm-offset-2 col-sm-2 control-label" for="ircnick">Your IRC nickname</label>
+		<label class="col-sm-offset-2 col-sm-2 control-label" for="ircnick">Your IRC nickname</label>
 		<div class="col-sm-4">
-		  <div class="typeahead__container">
-		  <div class="typeahead__field">
-			<span class="typeahead__query">
-			<input {{TEXT "ircnick" .item.IRC .}} id="ircnick" class="form-control js-typeahead-group" placeholder="enter your irc nickname" autocomplete="off" type="search">
-			</span>
-		  </div>
-		  </div>
+			<div class="typeahead__container">
+			<div class="typeahead__field">
+				<span class="typeahead__query">
+				<input {{TEXT "ircnick" .item.IRC .}} id="ircnick" class="form-control js-typeahead-group" placeholder="enter your irc nickname" autocomplete="off" type="search">
+				</span>
+			</div>
+			</div>
 		</div>
 		<div class="col-sm-1">
-                        <button type="submit" class="btn btn-primary" />
-                        <span class="fa fa-angle-right" aria-hidden="true"></span> Sign In
-                        </button>
+			<button type="submit" class="btn btn-primary" />
+			<span class="fa fa-angle-right" aria-hidden="true"></span> Sign In
+			</button>
 		</div>
 	</div>
 
@@ -48,24 +48,19 @@
 	<div class="form-group"><p/></div>
 </form>
 
-
-<script>                                                                                       $.typeahead({
-    input: '.js-typeahead-group',
-    order: "desc",
-    source: {
-        group: {
-                display: 'IRC',
-                data: jQuery.parseJSON(atob({{.json}}))
-                } 
-    },
-    callback: {
-        onInit: function (node) {
-            console.log('Typeahead Initiated on ' + node.selector);
-        }
-    }
+<script>
+$.typeahead({
+	input: '.js-typeahead-group',
+	order: "desc",
+	source: {
+		group: {
+			display: 'IRC',
+			data: jQuery.parseJSON(atob({{.json}}))
+		}
+	}
 });
 </script>
 
-{{template "footer" .}}
+	{{template "footer" .}}
 {{end}}
 {{define "foot"}}{{end}}

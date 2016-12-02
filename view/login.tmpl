@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" class="{{template "htmlclass" .}}">
-  <head>
+<html lang="en" class="login-pf">
+<head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,6 +17,7 @@
 	{{CSS "static/css/patternfly-additions.min.css" "all"}}
 	{{CSS "//fonts.googleapis.com/css?family=Open+Sans:300,400,bold,italic" "all"}}
 	{{CSS "static/css/all.min.css" "all"}}
+	{{JS "static/js/jquery.min.js"}}
 
 	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -24,28 +25,10 @@
 		<script src="//oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js"></script>
 		<script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 	<![endif]-->
-
-	{{template "head" .}}
-  </head>
-  <body>
-    <nav class="navbar navbar-inverse navbar-static-top">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="{{.BaseURI}}">Cheer</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-		  {{template "menu.tmpl" .}}
-        </div>
-      </div>
-    </nav>
-
+</head>
+<body>
 	<input id="BaseURI" type="hidden" value="{{.BaseURI}}">
+
 	<div id="flash-container">
 	{{range $fm := .flashes}}
 		<div id="flash-message" class="alert alert-box-fixed0 alert-box-fixed alert-dismissible {{.Class}}" role="alert">
@@ -59,12 +42,10 @@
 		{{template "content" .}}
 	</div>
 
-	{{JS "static/js/jquery.min.js"}}
 	{{JS "static/js/underscore-min.js"}}
 	{{JS "static/js/bootstrap.min.js"}}
 	{{JS "static/js/patternfly.min.js"}}
 	{{JS "static/js/all.min.js"}}
 
-	{{template "foot" .}}
-  </body>
+</body>
 </html>

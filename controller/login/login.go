@@ -27,7 +27,7 @@ func Load() {
 func Index(w http.ResponseWriter, r *http.Request) {
 	c := flight.Context(w, r)
 
-	v := c.View.New("login/index").Base("base-customhtmlclass")
+	v := c.View.New("login/index").Base("login")
 	form.Repopulate(r.Form, v.Vars, "email")
 	v.Render(w, r)
 }

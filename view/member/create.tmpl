@@ -1,7 +1,7 @@
 {{define "title"}}New Member{{end}}
 {{define "head"}}
-{{CSS "/static/css/jquery.typeahead.min.css" "all"}}
-{{JS "/static/js/jquery.typeahead.min.js"}}
+	{{CSS "/static/css/jquery.typeahead.min.css" "all"}}
+	{{JS "/static/js/jquery.typeahead.min.js"}}
 {{end}}
 {{define "content"}}
 	<div class="page-header">
@@ -29,7 +29,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<div class="form-group">
 		<div class="col-sm-10"><input {{TEXT "group_id" .item.GID .}} class="hidden form-control" id="group_id"></div>
 		</div>
@@ -51,27 +51,22 @@
 
 <script>
 $.typeahead({
-    input: '.js-typeahead-group',
-    order: "desc",
-    source: {
-	group: {
-		display: 'Name',
-		data: jQuery.parseJSON(atob({{.json}}))
-		} 
-    },
-    callback: {
-        onInit: function (node) {
-            console.log('Typeahead Initiated on ' + node.selector);
-        },
-	onClickAfter: function (node, a, item, event) {
-	    console.log('item is ' + item.ID);
-	    $('#group_id').val(item.ID);
+	input: '.js-typeahead-group',
+	order: "desc",
+	source: {
+		group: {
+			display: 'Name',
+			data: jQuery.parseJSON(atob({{.json}}))
+		}
+	},
+	callback: {
+		onClickAfter: function (node, a, item, event) {
+			$('#group_id').val(item.ID);
+		}
 	}
-    }
 });
 </script>
 
-
-{{template "footer" .}}
+	{{template "footer" .}}
 {{end}}
 {{define "foot"}}{{end}}
